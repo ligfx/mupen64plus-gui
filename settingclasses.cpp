@@ -7,6 +7,7 @@
 #include <SDL2/SDL.h>
 #include <QLabel>
 #include <QVBoxLayout>
+#include <QFileDialog>
 
 CustomLineEdit::CustomLineEdit()
 {
@@ -102,6 +103,9 @@ CustomComboBox::CustomComboBox()
                 temp = 2;
                 break;
             case 2:
+                temp = 4;
+                break;
+            case 3:
                 temp = 5;
                 break;
             default:
@@ -158,4 +162,18 @@ CustomPushButton::CustomPushButton()
         keyselect->setLayout(layout);
         keyselect->show();
     });
+}
+
+CustomPushButton2::CustomPushButton2()
+{
+    connect(this, &QAbstractButton::clicked, [=](){
+        QString filename = QFileDialog::getOpenFileName(this,
+                                                    tr("Select File"), NULL, NULL);
+        if (!filename.isNull()) {
+            (*ConfigSetParameter)(m_CurrentHandle, m_ParamName.c_str(), m_ParamType, filename.toLatin1().data());
+            (*ConfigSaveFile)();
+            this->setText(filename);
+        }
+    });
+
 }

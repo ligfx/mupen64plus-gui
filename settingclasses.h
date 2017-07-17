@@ -120,4 +120,24 @@ private:
     int m_Joystick;
 };
 
+class CustomPushButton2 : public QPushButton
+{
+public:
+    CustomPushButton2();
+    void setParamName(const char* ParamName) {
+        m_ParamName = ParamName;
+    }
+    void setParamType(m64p_type ParamType) {
+        m_ParamType = ParamType;
+    }
+    void setConfigHandle(m64p_handle CurrentHandle) {
+        m_CurrentHandle = CurrentHandle;
+    }
+
+private:
+    m64p_type m_ParamType;
+    std::string m_ParamName;
+    m64p_handle m_CurrentHandle;
+};
+
 #endif // CUSTOMLINEEDIT_H
